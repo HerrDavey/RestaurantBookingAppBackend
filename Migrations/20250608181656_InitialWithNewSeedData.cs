@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RestaurantBookingApp.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialWithSeedData : Migration
+    public partial class InitialWithNewSeedData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,7 +65,9 @@ namespace RestaurantBookingApp.Migrations
                     { 1, 85.00m, "Włoska", "Autentyczna włoska kuchnia w sercu Krakowa. Specjalizujemy się w pizzy neapolitańskiej i świeżych makaronach.", false, "Kraków, Rynek Główny 10", "Trattoria da Vinci", 50 },
                     { 2, 120.00m, "Japońska", "Nowoczesne sushi przygotowywane przez doświadczonych mistrzów. Świeże ryby dostarczane codziennie.", false, "Warszawa, ul. Złota 59", "Sushi Master", 30 },
                     { 3, 60.00m, "Polska", "Tradycyjne dania kuchni podhalańskiej w regionalnym wystroju. Spróbuj naszego oscypka z żurawiną!", false, "Zakopane, Krupówki 25", "Góralska Chata", 80 },
-                    { 4, 150.00m, "Francuska", "Klimatyczne bistro z klasykami kuchni francuskiej. Idealne miejsce na romantyczną kolację.", true, "Gdańsk, ul. Długa 15", "Le Petit Paris", 25 }
+                    { 4, 150.00m, "Francuska", "Klimatyczne bistro z klasykami kuchni francuskiej. Idealne miejsce na romantyczną kolację.", false, "Gdańsk, ul. Długa 15", "Le Petit Paris", 25 },
+                    { 5, 75.00m, "Meksykańska", "Fiesta smaków prosto z Meksyku. Prawdziwe tacos, burrito i orzeźwiająca margarita.", false, "Wrocław, Plac Solny 5", "El Sombrero", 40 },
+                    { 6, 180.00m, "Amerykańska", "Najlepsze steki w mieście. Sezonowana wołowina, idealnie wysmażona według Twoich preferencji.", true, "Poznań, Stary Rynek 100", "Steakhouse 'Angus'", 60 }
                 });
 
             migrationBuilder.InsertData(
@@ -73,10 +75,12 @@ namespace RestaurantBookingApp.Migrations
                 columns: new[] { "Id", "ClientEmail", "ClientName", "ReservationDateTime", "RestaurantId", "SeatsReserved", "Status", "TableNumber" },
                 values: new object[,]
                 {
-                    { 1, "jan.kowalski@example.com", "Jan Kowalski", new DateTime(2025, 6, 11, 19, 0, 0, 0, DateTimeKind.Local), 1, 2, "Confirmed", 5 },
-                    { 2, "anna.nowak@example.com", "Anna Nowak", new DateTime(2025, 6, 13, 20, 0, 0, 0, DateTimeKind.Local), 2, 4, "Confirmed", 1 },
-                    { 3, "piotr.zielinski@example.com", "Piotr Zieliński", new DateTime(2025, 6, 11, 19, 0, 0, 0, DateTimeKind.Local), 1, 3, "Confirmed", 6 },
-                    { 4, "k.wisniewska@example.com", "Katarzyna Wiśniewska", new DateTime(2025, 6, 7, 18, 0, 0, 0, DateTimeKind.Local), 3, 6, "Confirmed", null }
+                    { 1, "alicja.test@example.com", "Alicja Testowa", new DateTime(2025, 6, 8, 18, 0, 0, 0, DateTimeKind.Unspecified), 1, 4, "Confirmed", 1 },
+                    { 2, "b.programista@example.com", "Bartosz Programista", new DateTime(2025, 6, 8, 18, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, "Confirmed", 2 },
+                    { 3, "celina.w@example.com", "Celina Wdrożenie", new DateTime(2025, 6, 8, 20, 30, 0, 0, DateTimeKind.Unspecified), 2, 2, "Confirmed", 5 },
+                    { 4, "d.debug@example.com", "Dawid Debug", new DateTime(2025, 6, 9, 19, 0, 0, 0, DateTimeKind.Unspecified), 5, 6, "Confirmed", 10 },
+                    { 5, "ewa.error@example.com", "Ewa Error", new DateTime(2025, 6, 9, 17, 0, 0, 0, DateTimeKind.Unspecified), 3, 8, "Cancelled", null },
+                    { 6, "fabian.f@example.com", "Fabian Frontend", new DateTime(2025, 6, 10, 20, 0, 0, 0, DateTimeKind.Unspecified), 4, 2, "Confirmed", 3 }
                 });
 
             migrationBuilder.CreateIndex(

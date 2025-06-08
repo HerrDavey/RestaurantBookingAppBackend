@@ -10,16 +10,18 @@ namespace RestaurantBookingApp.Data
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
 
-        // Ta metoda jest kluczowa dla dodawania danych startowych
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Pobieramy dzisiejszą datę, aby rezerwacje były zawsze "aktualne" względem dnia testów
+            var today = DateTime.Now.Date;
 
             // === DANE STARTOWE DLA RESTAURACJI ===
             modelBuilder.Entity<Restaurant>().HasData(
                 new Restaurant
                 {
-                    Id = 1, // Ważne: musimy jawnie podać ID dla danych startowych
+                    Id = 1,
                     Name = "Trattoria da Vinci",
                     CuisineType = "Włoska",
                     Location = "Kraków, Rynek Główny 10",
@@ -59,54 +61,103 @@ namespace RestaurantBookingApp.Data
                     Description = "Klimatyczne bistro z klasykami kuchni francuskiej. Idealne miejsce na romantyczną kolację.",
                     TotalSeats = 25,
                     AveragePrice = 150.00m,
-                    IsClosed = true // Ta restauracja będzie oznaczona jako zamknięta
+                    IsClosed = false
+                },
+                new Restaurant
+                {
+                    Id = 5,
+                    Name = "El Sombrero",
+                    CuisineType = "Meksykańska",
+                    Location = "Wrocław, Plac Solny 5",
+                    Description = "Fiesta smaków prosto z Meksyku. Prawdziwe tacos, burrito i orzeźwiająca margarita.",
+                    TotalSeats = 40,
+                    AveragePrice = 75.00m,
+                    IsClosed = false
+                },
+                new Restaurant
+                {
+                    Id = 6,
+                    Name = "Steakhouse 'Angus'",
+                    CuisineType = "Amerykańska",
+                    Location = "Poznań, Stary Rynek 100",
+                    Description = "Najlepsze steki w mieście. Sezonowana wołowina, idealnie wysmażona według Twoich preferencji.",
+                    TotalSeats = 60,
+                    AveragePrice = 180.00m,
+                    IsClosed = true // Ta restauracja jest oznaczona jako zamknięta
                 }
             );
 
-            // === DANE STARTOWE DLA REZERWACJI ===
+            // === DANE STARTOWE DLA REZERWACJI (z uwzględnieniem 8 czerwca i okolic) ===
             modelBuilder.Entity<Reservation>().HasData(
+                // --- Rezerwacje na 8 czerwca ---
                 new Reservation
                 {
                     Id = 1,
-                    RestaurantId = 1, // Rezerwacja w "Trattoria da Vinci"
-                    ReservationDateTime = DateTime.Now.Date.AddDays(3).AddHours(19), // Za 3 dni o 19:00
-                    SeatsReserved = 2,
-                    ClientName = "Jan Kowalski",
-                    ClientEmail = "jan.kowalski@example.com",
-                    Status = "Confirmed",
-                    TableNumber = 5
-                },
-                new Reservation
-                {
-                    Id = 2,
-                    RestaurantId = 2, // Rezerwacja w "Sushi Master"
-                    ReservationDateTime = DateTime.Now.Date.AddDays(5).AddHours(20), // Za 5 dni o 20:00
+                    RestaurantId = 1, // Trattoria da Vinci
+                    ReservationDateTime = new DateTime(today.Year, 6, 8, 18, 0, 0),
                     SeatsReserved = 4,
-                    ClientName = "Anna Nowak",
-                    ClientEmail = "anna.nowak@example.com",
+                    ClientName = "Alicja Testowa",
+                    ClientEmail = "alicja.test@example.com",
                     Status = "Confirmed",
                     TableNumber = 1
                 },
                 new Reservation
                 {
-                    Id = 3,
-                    RestaurantId = 1, // Kolejna rezerwacja w "Trattoria da Vinci"
-                    ReservationDateTime = DateTime.Now.Date.AddDays(3).AddHours(19), // Ten sam termin co rezerwacja 1
-                    SeatsReserved = 3,
-                    ClientName = "Piotr Zieliński",
-                    ClientEmail = "piotr.zielinski@example.com",
+                    Id = 2,
+                    RestaurantId = 1, // Trattoria da Vinci
+                    ReservationDateTime = new DateTime(today.Year, 6, 8, 18, 0, 0), // Ten sam termin, inny stolik
+                    SeatsReserved = 2,
+                    ClientName = "Bartosz Programista",
+                    ClientEmail = "b.programista@example.com",
                     Status = "Confirmed",
-                    TableNumber = 6
+                    TableNumber = 2
                 },
                 new Reservation
                 {
+                    Id = 3,
+                    RestaurantId = 2, // Sushi Master
+                    ReservationDateTime = new DateTime(today.Year, 6, 8, 20, 30, 0),
+                    SeatsReserved = 2,
+                    ClientName = "Celina Wdrożenie",
+                    ClientEmail = "celina.w@example.com",
+                    Status = "Confirmed",
+                    TableNumber = 5
+                },
+
+                // --- Rezerwacje na 9 czerwca ---
+                new Reservation
+                {
                     Id = 4,
-                    RestaurantId = 3, // Rezerwacja w "Góralska Chata"
-                    ReservationDateTime = DateTime.Now.Date.AddDays(-1).AddHours(18), // Rezerwacja z przeszłości
+                    RestaurantId = 5, // El Sombrero
+                    ReservationDateTime = new DateTime(today.Year, 6, 9, 19, 0, 0),
                     SeatsReserved = 6,
-                    ClientName = "Katarzyna Wiśniewska",
-                    ClientEmail = "k.wisniewska@example.com",
-                    Status = "Confirmed"
+                    ClientName = "Dawid Debug",
+                    ClientEmail = "d.debug@example.com",
+                    Status = "Confirmed",
+                    TableNumber = 10
+                },
+                new Reservation
+                {
+                    Id = 5,
+                    RestaurantId = 3, // Góralska Chata
+                    ReservationDateTime = new DateTime(today.Year, 6, 9, 17, 0, 0),
+                    SeatsReserved = 8,
+                    ClientName = "Ewa Error",
+                    ClientEmail = "ewa.error@example.com",
+                    Status = "Cancelled" // Rezerwacja anulowana
+                },
+
+                // --- Rezerwacje na kolejne dni ---
+                new Reservation
+                {
+                    Id = 6,
+                    RestaurantId = 4, // Le Petit Paris
+                    ReservationDateTime = new DateTime(today.Year, 6, 10, 20, 0, 0),
+                    SeatsReserved = 2,
+                    ClientName = "Fabian Frontend",
+                    ClientEmail = "fabian.f@example.com",
+                    Status = "Confirmed",
+                    TableNumber = 3
                 }
             );
         }

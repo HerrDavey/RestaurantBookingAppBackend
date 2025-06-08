@@ -11,8 +11,8 @@ using RestaurantBookingApp.Data;
 namespace RestaurantBookingApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250608170134_InitialWithSeedData")]
-    partial class InitialWithSeedData
+    [Migration("20250608181656_InitialWithNewSeedData")]
+    partial class InitialWithNewSeedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,45 +60,67 @@ namespace RestaurantBookingApp.Migrations
                         new
                         {
                             Id = 1,
-                            ClientEmail = "jan.kowalski@example.com",
-                            ClientName = "Jan Kowalski",
-                            ReservationDateTime = new DateTime(2025, 6, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            ClientEmail = "alicja.test@example.com",
+                            ClientName = "Alicja Testowa",
+                            ReservationDateTime = new DateTime(2025, 6, 8, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             RestaurantId = 1,
-                            SeatsReserved = 2,
-                            Status = "Confirmed",
-                            TableNumber = 5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClientEmail = "anna.nowak@example.com",
-                            ClientName = "Anna Nowak",
-                            ReservationDateTime = new DateTime(2025, 6, 13, 20, 0, 0, 0, DateTimeKind.Local),
-                            RestaurantId = 2,
                             SeatsReserved = 4,
                             Status = "Confirmed",
                             TableNumber = 1
                         },
                         new
                         {
-                            Id = 3,
-                            ClientEmail = "piotr.zielinski@example.com",
-                            ClientName = "Piotr Zieliński",
-                            ReservationDateTime = new DateTime(2025, 6, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            Id = 2,
+                            ClientEmail = "b.programista@example.com",
+                            ClientName = "Bartosz Programista",
+                            ReservationDateTime = new DateTime(2025, 6, 8, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             RestaurantId = 1,
-                            SeatsReserved = 3,
+                            SeatsReserved = 2,
                             Status = "Confirmed",
-                            TableNumber = 6
+                            TableNumber = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClientEmail = "celina.w@example.com",
+                            ClientName = "Celina Wdrożenie",
+                            ReservationDateTime = new DateTime(2025, 6, 8, 20, 30, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 2,
+                            SeatsReserved = 2,
+                            Status = "Confirmed",
+                            TableNumber = 5
                         },
                         new
                         {
                             Id = 4,
-                            ClientEmail = "k.wisniewska@example.com",
-                            ClientName = "Katarzyna Wiśniewska",
-                            ReservationDateTime = new DateTime(2025, 6, 7, 18, 0, 0, 0, DateTimeKind.Local),
-                            RestaurantId = 3,
+                            ClientEmail = "d.debug@example.com",
+                            ClientName = "Dawid Debug",
+                            ReservationDateTime = new DateTime(2025, 6, 9, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 5,
                             SeatsReserved = 6,
-                            Status = "Confirmed"
+                            Status = "Confirmed",
+                            TableNumber = 10
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClientEmail = "ewa.error@example.com",
+                            ClientName = "Ewa Error",
+                            ReservationDateTime = new DateTime(2025, 6, 9, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 3,
+                            SeatsReserved = 8,
+                            Status = "Cancelled"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ClientEmail = "fabian.f@example.com",
+                            ClientName = "Fabian Frontend",
+                            ReservationDateTime = new DateTime(2025, 6, 10, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            RestaurantId = 4,
+                            SeatsReserved = 2,
+                            Status = "Confirmed",
+                            TableNumber = 3
                         });
                 });
 
@@ -177,10 +199,32 @@ namespace RestaurantBookingApp.Migrations
                             AveragePrice = 150.00m,
                             CuisineType = "Francuska",
                             Description = "Klimatyczne bistro z klasykami kuchni francuskiej. Idealne miejsce na romantyczną kolację.",
-                            IsClosed = true,
+                            IsClosed = false,
                             Location = "Gdańsk, ul. Długa 15",
                             Name = "Le Petit Paris",
                             TotalSeats = 25
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AveragePrice = 75.00m,
+                            CuisineType = "Meksykańska",
+                            Description = "Fiesta smaków prosto z Meksyku. Prawdziwe tacos, burrito i orzeźwiająca margarita.",
+                            IsClosed = false,
+                            Location = "Wrocław, Plac Solny 5",
+                            Name = "El Sombrero",
+                            TotalSeats = 40
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AveragePrice = 180.00m,
+                            CuisineType = "Amerykańska",
+                            Description = "Najlepsze steki w mieście. Sezonowana wołowina, idealnie wysmażona według Twoich preferencji.",
+                            IsClosed = true,
+                            Location = "Poznań, Stary Rynek 100",
+                            Name = "Steakhouse 'Angus'",
+                            TotalSeats = 60
                         });
                 });
 
